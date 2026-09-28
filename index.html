@@ -198,18 +198,52 @@
           <h2 class="section-title">Floor-by-Floor Availability</h2>
           <p class="section-sub" id="floor-subtitle">Rooms across all floors right now</p>
         </div>
-        <div class="filter-bar">
-          <button class="filter-btn active" data-filter="all" id="filter-all">All Rooms</button>
-          <button class="filter-btn" data-filter="free" id="filter-free">
-            <span class="dot-green"></span>Free Only
-          </button>
-          <button class="filter-btn" data-filter="busy" id="filter-busy">
-            <span class="dot-red"></span>Occupied
-          </button>
+        <div class="view-and-filter-controls">
+          <div class="view-toggle-bar">
+            <button class="view-btn active" id="view-mode-3d">3D Map</button>
+            <button class="view-btn" id="view-mode-grid">Grid View</button>
+          </div>
+          <div class="filter-bar">
+            <button class="filter-btn active" data-filter="all" id="filter-all">All Rooms</button>
+            <button class="filter-btn" data-filter="free" id="filter-free">
+              <span class="dot-green"></span>Free Only
+            </button>
+            <button class="filter-btn" data-filter="busy" id="filter-busy">
+              <span class="dot-red"></span>Occupied
+            </button>
+          </div>
         </div>
       </div>
 
-      <div id="floor-grid"></div>
+      <!-- 3D Map Wrapper -->
+      <div class="map-3d-wrapper" id="map-3d-view-wrapper">
+        <div class="map-3d-controls">
+          <div class="floor-selector-pills">
+            <button class="floor-pill active" data-floor="all">All Floors</button>
+            <button class="floor-pill" data-floor="1">1</button>
+            <button class="floor-pill" data-floor="2">2</button>
+            <button class="floor-pill" data-floor="3">3</button>
+            <button class="floor-pill" data-floor="4">4</button>
+            <button class="floor-pill" data-floor="5">5</button>
+            <button class="floor-pill" data-floor="6">6</button>
+            <button class="floor-pill" data-floor="7">7</button>
+            <button class="floor-pill" data-floor="G">G</button>
+            <button class="floor-pill" data-floor="H">H</button>
+            <button class="floor-pill" data-floor="W">W</button>
+          </div>
+          <div class="map-perspective-controls">
+            <button class="cam-btn active" id="cam-reset">Isometric</button>
+            <button class="cam-btn" id="cam-flat">Top Down</button>
+          </div>
+        </div>
+        <div class="map-3d-stage-viewport" id="map-3d-stage-viewport">
+          <div class="map-3d-building-stack" id="map-3d-building-stack">
+            <!-- Slabs generated here -->
+          </div>
+        </div>
+      </div>
+
+      <div id="floor-grid" class="hidden"></div>
     </div>
   </section>
 
@@ -224,6 +258,70 @@
       </div>
     </div>
   </section>
+
+  <!-- ═══ ROOM MODAL ═══ -->
+  <div class="modal-backdrop hidden" id="room-modal-backdrop">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="modal-close-btn">✕</button>
+      
+      <div class="modal-header">
+        <div class="modal-title-row">
+          <h3 class="modal-room-name" id="modal-room-name"></h3>
+          <span class="modal-status-badge" id="modal-status-badge"></span>
+        </div>
+        <div class="modal-room-meta" id="modal-room-meta"></div>
+      </div>
+
+      <div class="countdown-card">
+        <div class="countdown-header-label" id="countdown-label">TIME REMAINING</div>
+        <div class="countdown-digits-wrap">
+          <div class="countdown-digit-box">
+            <span class="cd-num" id="cd-hours">00</span>
+            <span class="cd-unit">HRS</span>
+          </div>
+          <span class="cd-colon">:</span>
+          <div class="countdown-digit-box">
+            <span class="cd-num" id="cd-mins">00</span>
+            <span class="cd-unit">MIN</span>
+          </div>
+          <span class="cd-colon">:</span>
+          <div class="countdown-digit-box">
+            <span class="cd-num" id="cd-secs">00</span>
+            <span class="cd-unit">SEC</span>
+          </div>
+        </div>
+        <div class="countdown-subtext" id="countdown-subtext"></div>
+      </div>
+
+      <div class="squad-section">
+        <div class="squad-box-header">
+          <span class="squad-icon">👋</span>
+          <div>
+            <div class="squad-title">Call the Squad</div>
+            <div class="squad-sub">Instantly invite friends to this room</div>
+          </div>
+        </div>
+        <div class="squad-preview-card">
+          <div class="squad-preview-label">MESSAGE PREVIEW</div>
+          <div class="squad-preview-text" id="squad-preview-text"></div>
+        </div>
+        <div class="squad-actions">
+          <a href="#" class="squad-btn squad-btn-wa" id="squad-wa-btn" target="_blank">
+            WhatsApp
+          </a>
+          <button class="squad-btn squad-btn-copy" id="squad-copy-btn">Copy Text</button>
+          <button class="squad-btn squad-btn-copy hidden" id="squad-share-btn">Share</button>
+        </div>
+      </div>
+
+      <div class="schedule-preview">
+        <div class="schedule-preview-title">Today's Schedule</div>
+        <div class="schedule-slots-list" id="schedule-slots-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-notification hidden" id="toast-notification"></div>
 
   <!-- ═══ FOOTER ═══ -->
   <footer class="site-footer">
